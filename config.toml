@@ -1,0 +1,20 @@
+[params]
+first_name = 
+last_name = 
+pseudo = 
+age = 
+description = 
+bio = 
+languages = 
+chip = 
+
+[params.term]
+user = 
+host = 
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[markup.highlight]
+style = "github-dark"
+lineNos = true
