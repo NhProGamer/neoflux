@@ -1,0 +1,118 @@
+{{ define "main" }}
+<body class="bg-background text-text-primary font-sans min-h-screen flex flex-col">
+<!-- Floating elements -->
+<div class="fixed inset-0 overflow-hidden -z-10 pointer-events-none">
+    <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-primary rounded-full opacity-20 animate-float"></div>
+    <div class="absolute top-1/3 right-1/3 w-3 h-3 bg-secondary rounded-full opacity-20 animate-float animation-delay-2000"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-1 h-1 bg-accent rounded-full opacity-20 animate-float animation-delay-3000"></div>
+</div>
+
+<!-- Hero Section -->
+<section class="container mx-auto px-6 py-16 md:py-24">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="inline-block px-3 py-1 rounded-full bg-surface text-primary text-sm font-medium mb-4">{{ .Params.badge | default "À Propos" }}</span>
+            <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">
+                <span class="text-gradient">{{ .Title | default "Mon Parcours" }}</span>
+            </h1>
+            <p class="text-lg text-text-secondary max-w-2xl mx-auto">
+                {{ .Params.subtitle | default "Découvrez mon parcours, mes passions et ce qui me motive dans le développement backend." }}
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Content Section -->
+<section class="container mx-auto px-6 pb-16">
+    <div class="max-w-4xl mx-auto">
+        <div class="grid lg:grid-cols-3 gap-12">
+            <!-- Main Content -->
+            <div class="lg:col-span-2">
+                <div class="prose prose-lg prose-invert max-w-none">
+                    <div class="markdown-content">
+                        {{ .Content }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="lg:col-span-1">
+                <div class="sticky top-8 space-y-8">
+                    <!-- Profile Card -->
+                    <div class="bg-surface rounded-xl p-6 border border-surface hover:border-primary/30 transition-colors">
+                        <div class="text-center mb-6">
+                            <div class="w-20 h-20 rounded-full bg-primary/10 border-2 border-primary/20 flex items-center justify-center mx-auto mb-4">
+                                <span class="font-mono font-bold text-primary text-2xl">NH</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">{{ .Params.profile.name | default "Néo Huyghe" }}</h3>
+                            <p class="text-text-secondary">{{ .Params.profile.title | default "Développeur Backend" }}</p>
+                        </div>
+                        <div class="space-y-3 text-sm">
+                            {{ if .Params.profile.age }}
+                            <div class="flex items-center">
+                                <span class="w-20 text-text-secondary">Âge:</span>
+                                <span>{{ .Params.profile.age }} ans</span>
+                            </div>
+                            {{ end }}
+                            {{ if .Params.profile.location }}
+                            <div class="flex items-center">
+                                <span class="w-20 text-text-secondary">Lieu:</span>
+                                <span>{{ .Params.profile.location }}</span>
+                            </div>
+                            {{ end }}
+                            {{ if .Params.profile.experience }}
+                            <div class="flex items-center">
+                                <span class="w-20 text-text-secondary">Exp:</span>
+                                <span>{{ .Params.profile.experience }}</span>
+                            </div>
+                            {{ end }}
+                        </div>
+                    </div>
+
+                    <!-- Skills -->
+                    {{ if .Params.skills }}
+                    <div class="bg-surface rounded-xl p-6 border border-surface hover:border-primary/30 transition-colors">
+                        <h3 class="text-lg font-semibold mb-4">Compétences</h3>
+                        <div class="space-y-3">
+                            {{ range .Params.skills }}
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-sm font-medium">{{ .name }}</span>
+                                    <span class="text-xs text-text-secondary">{{ .level }}%</span>
+                                </div>
+                                <div class="w-full bg-background rounded-full h-2">
+                                    <div class="bg-primary rounded-full h-2 transition-all duration-300" style="width: {{ .level }}%"></div>
+                                </div>
+                            </div>
+                            {{ end }}
+                        </div>
+                    </div>
+                    {{ end }}
+
+                    <!-- Technologies -->
+                    {{ if .Params.technologies }}
+                    <div class="bg-surface rounded-xl p-6 border border-surface hover:border-primary/30 transition-colors">
+                        <h3 class="text-lg font-semibold mb-4">Technologies</h3>
+                        <div class="flex flex-wrap gap-2">
+                            {{ range .Params.technologies }}
+                            <span class="px-3 py-1 rounded-full bg-background text-primary text-xs font-medium">{{ . }}</span>
+                            {{ end }}
+                        </div>
+                    </div>
+                    {{ end }}
+
+                    <!-- Contact CTA -->
+                    <div class="bg-surface rounded-xl p-6 border border-surface hover:border-primary/30 transition-colors">
+                        <h3 class="text-lg font-semibold mb-3">Travaillons ensemble</h3>
+                        <p class="text-text-secondary text-sm mb-4">Vous avez un projet en tête ?</p>
+                        <a href="/#contact" class="block w-full px-4 py-2 rounded-md bg-primary hover:bg-primary-dark text-background font-medium text-center transition-colors">
+                            Me contacter
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+{{ end }}

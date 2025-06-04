@@ -1,0 +1,21 @@
+<header class="container mx-auto px-6 py-6">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
+                    <span class="font-mono font-bold text-primary">{{ printf "%s%s" (upper (substr .Site.Params.first_name 0 1)) (upper (substr .Site.Params.last_name 0 1)) }}</span>
+                </div>
+                <span class="font-medium">{{ .Site.Params.pseudo }}</span>
+            </div>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="/#home" class="text-text-secondary hover:text-primary transition-colors">Accueil</a>
+                <a href="/#expertise" class="text-text-secondary hover:text-primary transition-colors">Expertise</a>
+                <!--<a href="/#projects" class="text-text-secondary hover:text-primary transition-colors">Projets</a>-->
+                <a href="/blog" class="text-text-secondary hover:text-primary transition-colors">Blog</a>
+                <a href="/about" class="text-text-secondary hover:text-primary transition-colors">A Propos</a>
+                <!--<a href="/#contact" class="px-4 py-2 rounded-md bg-surface hover:bg-primary/10 border border-surface hover:border-primary/30 transition-colors">
+                    Contact
+                </a>-->
+            </nav>
+            <button class="md:hidden text-xl">☰</button>
+        </div>
+    </header>

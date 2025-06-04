@@ -1,0 +1,40 @@
+{{ define "main" }}
+<section id="blog" class="container mx-auto px-6 py-12">
+    <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full bg-surface text-primary text-xs font-medium mb-2">Blog</span>
+        <h2 class="text-2xl md:text-3xl font-bold mb-2">Mes derniers articles</h2>
+        <p class="text-base text-text-secondary max-w-2xl mx-auto">
+            J'écris sur le développement backend, mes projets et mes apprentissages.
+        </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {{ range .Pages }}
+        {{ $page := . }}
+        <a href="{{ $page.RelPermalink }}" class="group bg-surface rounded-lg border border-surface hover:border-primary card-hover overflow-hidden flex flex-col text-sm transition-all duration-200">
+
+            {{ with $page.Params.featured_image }}
+            {{ with $page.Resources.GetMatch . }}
+            <img src="{{ .RelPermalink }}" alt="Miniature de {{ $page.Title }}" class="w-full h-32 object-cover">
+            {{ end }}
+            {{ end }}
+
+            <div class="p-4 flex flex-col flex-1">
+                <div class="flex justify-between items-center text-xs text-text-secondary mb-1">
+                    {{ with index $page.Params.tags 0 }}
+                    <span class="text-primary font-medium">{{ . }}</span>
+                    {{ end }}
+                    <span>{{ $page.Date.Format "2 Jan 2006" }}</span>
+                </div>
+                <h3 class="text-base font-semibold text-text-primary mb-2 group-hover:text-primary transition-colors">
+                    {{ $page.Title }}
+                </h3>
+                <p class="text-xs text-text-secondary line-clamp-3">
+                    {{ $page.Summary }}
+                </p>
+            </div>
+        </a>
+        {{ end }}
+    </div>
+</section>
+{{ end }}
