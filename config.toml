@@ -1,16 +1,16 @@
 [params]
-first_name = 
-last_name = 
-pseudo = 
-age = 
-description = 
-bio = 
-languages = 
-chip = 
+first_name = ""
+last_name = ""
+pseudo = ""
+age = 0
+description = ""
+bio = ""
+languages = []
+chip = ""
 
 [params.term]
-user = 
-host = 
+user = ""
+host = ""
 
 [markup.goldmark.renderer]
 unsafe = true
