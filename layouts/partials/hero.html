@@ -40,7 +40,7 @@
                         <p class="pl-4"><span class="text-text-primary">age</span>: <span class="code-number">{{ .Site.Params.age }}</span>,</p>
                         <p class="pl-4"><span class="text-text-primary">languages</span>: [</p>
                         {{ range .Site.Params.languages }}
-                        <p class="pl-8"><span class="code-string">'{{ . }}'</span></p>
+                        <p class="pl-8"><span class="code-string">'{{ . }}'<span class="text-text-primary">,</span></span></p>
                         {{ end }}
                         <p class="pl-4">]</p>
                         <p>};</p>
