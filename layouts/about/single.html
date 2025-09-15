@@ -48,10 +48,12 @@
                             <p class="text-text-secondary">{{ .Params.profile.title | default "Développeur Backend" }}</p>
                         </div>
                         <div class="space-y-3 text-sm">
-                            {{ if .Params.profile.age }}
+                            {{ if .Params.profile.birthdate }}
+                            {{ $birthdate := time .Params.profile.birthdate }}
+                            {{ $age := div (sub now.Unix $birthdate.Unix) 31557600 }}
                             <div class="flex items-center">
                                 <span class="w-20 text-text-secondary">Âge:</span>
-                                <span>{{ .Params.profile.age }} ans</span>
+                                <span>{{ $age }} ans</span>
                             </div>
                             {{ end }}
                             {{ if .Params.profile.location }}
