@@ -2,7 +2,7 @@
 first_name = ""
 last_name = ""
 pseudo = ""
-age = 0
+age = "2000-1-1"
 description = ""
 bio = ""
 languages = []
