@@ -44,13 +44,14 @@
                             <div class="w-20 h-20 rounded-full bg-primary/10 border-2 border-primary/20 flex items-center justify-center mx-auto mb-4">
                                 <span class="font-mono font-bold text-primary text-2xl">NH</span>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">{{ .Params.profile.name | default "Néo Huyghe" }}</h3>
+                            <h3 class="text-xl font-semibold mb-2">{{ .Site.Params.first_name }} {{ .Site.Params.last_name }}</h3>
                             <p class="text-text-secondary">{{ .Params.profile.title | default "Développeur Backend" }}</p>
                         </div>
                         <div class="space-y-3 text-sm">
-                            {{ if .Params.profile.birthdate }}
-                            {{ $birthdate := time .Params.profile.birthdate }}
-                            {{ $age := div (sub now.Unix $birthdate.Unix) 31557600 }}
+                            {{ if .Site.Params.birthdate }}
+                            {{ $birthdate := time .Site.Params.birthdate }}
+                            {{ $now := now }}
+                            {{ $age := sub (div (sub $now.Unix $birthdate.Unix) 31556952) 0 }}
                             <div class="flex items-center">
                                 <span class="w-20 text-text-secondary">Âge:</span>
                                 <span>{{ $age }} ans</span>
