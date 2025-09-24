@@ -11,6 +11,12 @@
         {{ range first 2 (where site.RegularPages "Section" "blog") }}
         {{ $page := . }}
         <a href="{{ $page.RelPermalink }}" class="bg-surface rounded-xl border border-surface hover:border-primary card-hover block overflow-hidden">
+            {{ with $page.Params.featured_image }}
+            {{ $img := $page.Resources.GetMatch . }}
+            {{ with $img }}
+            <img src="{{ .RelPermalink }}" alt="{{ $page.Title }}" class="w-full h-48 object-cover">
+            {{ end }}
+            {{ end }}
             <div class="p-8">
                 <div class="flex justify-between items-center mb-4">
                     {{ with index $page.Params.tags 0 }}
@@ -23,15 +29,17 @@
                     {{ $page.Summary }}
                 </p>
                 <span class="inline-flex items-center text-primary font-medium">
-            Lire l'article
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </span>
+                Lire l'article
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </span>
             </div>
         </a>
         {{ end }}
     </div>
+
+
 
     <div class="text-center mt-12">
         <a href="/blog" class="inline-flex items-center px-6 py-3 rounded-md bg-surface hover:bg-surface/80 border border-surface hover:border-primary/30 text-text-primary font-medium transition-colors">
