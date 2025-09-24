@@ -1,5 +1,4 @@
 {{ define "main" }}
-<body class="bg-background text-text-primary font-sans min-h-screen flex flex-col">
 <!-- Floating elements -->
 <div class="fixed inset-0 overflow-hidden -z-10 pointer-events-none">
     <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-primary rounded-full opacity-20 animate-float"></div>
@@ -30,7 +29,18 @@
             <div class="lg:col-span-2">
                 <div class="prose prose-lg prose-invert max-w-none">
                     <div class="markdown-content">
-                        {{ .Content }}
+                        <!-- Contenu avec formatage Markdown personnalisé -->
+                        <div class="content-markdown mb-12">
+                            {{ $content := .RawContent }}
+                            {{ if in $content "<!--more-->" }}
+                            {{ $parts := split $content "<!--more-->" }}
+                            {{ if gt (len $parts) 1 }}
+                            {{ index $parts 1 | markdownify }}
+                            {{ end }}
+                            {{ else }}
+                            {{ .Content }}
+                            {{ end }}
+                        </div>
                     </div>
                 </div>
             </div>

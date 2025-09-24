@@ -70,31 +70,101 @@
     animation: blink 1s step-end infinite;
 }
 
-/* Markdown styling */
-.markdown-content { @apply text-text-primary; }
-.markdown-content h2 {
-    @apply text-2xl font-bold mb-6 mt-8;
+/* ===========================
+   Markdown Styling Unifié
+   =========================== */
+
+.content-markdown {
+    @apply text-text-primary leading-relaxed;
 }
-.markdown-content h2.text-gradient {
-    /* autoriser le gradient en plus */
+
+/* Titres */
+.content-markdown h1 {
+    @apply text-4xl font-bold mt-8 mb-4 text-text-primary;
 }
-.markdown-content h3 {
-    @apply text-xl font-semibold mb-4 mt-6 text-primary;
+.content-markdown h2 {
+    @apply text-3xl font-bold mt-8 mb-6;
 }
-.markdown-content p {
+.content-markdown h2.text-gradient {
+    /* active ton gradient custom */
+}
+.content-markdown h3 {
+    @apply text-2xl font-semibold mt-6 mb-4 text-primary;
+}
+.content-markdown h4 {
+    @apply text-xl font-semibold mt-6 mb-3 text-text-primary;
+}
+.content-markdown h5 {
+    @apply text-lg font-semibold mt-4 mb-2 text-text-primary;
+}
+.content-markdown h6 {
+    @apply text-base font-semibold mt-3 mb-2 text-text-secondary;
+}
+
+/* Paragraphes */
+.content-markdown p {
     @apply mb-4 text-text-secondary leading-relaxed;
 }
-.markdown-content strong {
-    @apply text-text-primary font-semibold;
+
+/* Textes inline */
+.content-markdown strong { @apply text-text-primary font-semibold; }
+.content-markdown em { @apply italic; }
+.content-markdown a {
+    @apply text-primary underline;
 }
-.markdown-content ul,
-.markdown-content ol {
+.content-markdown a:hover {
+    color: var(--color-primary-dark);
+}
+
+/* Listes */
+.content-markdown ul,
+.content-markdown ol {
     @apply mb-4 pl-6 text-text-secondary;
 }
-.markdown-content li { @apply mb-2; }
-.markdown-content blockquote {
-    @apply border-l-4 border-primary pl-4 italic text-text-secondary mb-4;
+.content-markdown ul li { list-style-type: disc; }
+.content-markdown ol li { list-style-type: decimal; }
+.content-markdown li { @apply mb-2; }
+
+/* Citations */
+.content-markdown blockquote {
+    @apply border-l-4 border-primary pl-4 italic mb-4 text-text-secondary;
+    background: rgba(125, 211, 252, 0.1); /* var(--color-primary avec opacité */
+    border-radius: 0.5rem;
+    padding: 1rem;
 }
-.markdown-content code {
+
+/* Code inline */
+.content-markdown code {
     @apply bg-code-bg text-code-text px-2 py-1 rounded text-sm font-mono;
+}
+
+/* Bloc de code */
+.content-markdown pre {
+    @apply bg-surface p-4 rounded-lg overflow-x-auto my-6;
+}
+.content-markdown pre code {
+    background: none;
+    padding: 0;
+}
+
+/* Images */
+.content-markdown img {
+    @apply max-w-full h-auto rounded-lg my-6;
+}
+
+/* Tableaux */
+.content-markdown table {
+    @apply w-full border-collapse my-6;
+}
+.content-markdown th,
+.content-markdown td {
+    @apply border border-surface p-3 text-left;
+}
+.content-markdown th {
+    @apply bg-surface font-semibold;
+}
+
+/* Séparateur */
+.content-markdown hr {
+    @apply border-t border-surface my-8;
 }
