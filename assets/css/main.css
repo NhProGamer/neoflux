@@ -1,0 +1,95 @@
+@import "tailwindcss";
+@source "hugo_stats.json";
+
+/* === Définition du thème === */
+@theme {
+    --font-sans: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --color-background: #0f172a;
+    --color-surface: #1e293b;
+    --color-primary: #7dd3fc;
+    --color-primary-dark: #0ea5e9;
+    --color-secondary: #a5b4fc;
+    --color-accent: #f472b6;
+    --color-text-primary: #f8fafc;
+    --color-text-secondary: #94a3b8;
+    --color-code-bg: #1e293b;
+    --color-code-text: #f8fafc;
+    --color-code-comment: #64748b;
+    --color-code-keyword: #7dd3fc;
+    --color-code-string: #86efac;
+    --color-code-number: #f472b6;
+
+    --animation-terminal-cursor: blink 1s step-end infinite;
+    --animation-float: float 6s ease-in-out infinite;
+
+    @keyframes blink {
+        from, to { opacity: 1; }
+        50% { opacity: 0; }
+    }
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+}
+
+/* === Classes custom (compatibles v4) === */
+
+/* Dégradé de texte */
+.text-gradient {
+    background: linear-gradient(90deg, #7dd3fc 0%, #a5b4fc 50%, #f472b6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Bloc de code */
+.code-block {
+    @apply bg-code-bg text-code-text p-6 rounded-lg overflow-x-auto font-mono text-sm border border-surface;
+}
+.code-keyword { @apply text-code-keyword; }
+.code-string { @apply text-code-string; }
+.code-number { @apply text-code-number; }
+.code-comment { @apply text-code-comment; }
+
+/* Carte avec hover */
+.card-hover {
+    @apply transition-all duration-300 hover:border-primary hover:shadow-lg hover:shadow-primary/10;
+}
+
+/* Ligne de terminal avec prefix */
+.terminal-line::before {
+    content: '[nhpro@t480 ~/] $ ';
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+/* Markdown styling */
+.markdown-content { @apply text-text-primary; }
+.markdown-content h2 {
+    @apply text-2xl font-bold mb-6 mt-8;
+}
+.markdown-content h2.text-gradient {
+    /* autoriser le gradient en plus */
+}
+.markdown-content h3 {
+    @apply text-xl font-semibold mb-4 mt-6 text-primary;
+}
+.markdown-content p {
+    @apply mb-4 text-text-secondary leading-relaxed;
+}
+.markdown-content strong {
+    @apply text-text-primary font-semibold;
+}
+.markdown-content ul,
+.markdown-content ol {
+    @apply mb-4 pl-6 text-text-secondary;
+}
+.markdown-content li { @apply mb-2; }
+.markdown-content blockquote {
+    @apply border-l-4 border-primary pl-4 italic text-text-secondary mb-4;
+}
+.markdown-content code {
+    @apply bg-code-bg text-code-text px-2 py-1 rounded text-sm font-mono;
+}
