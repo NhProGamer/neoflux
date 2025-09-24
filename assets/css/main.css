@@ -58,11 +58,16 @@
     @apply transition-all duration-300 hover:border-primary hover:shadow-lg hover:shadow-primary/10;
 }
 
+
 /* Ligne de terminal avec prefix */
 .terminal-line::before {
     content: '[nhpro@t480 ~/] $ ';
     color: var(--color-primary);
     font-weight: 700;
+}
+
+.animate-terminal-cursor {
+    animation: blink 1s step-end infinite;
 }
 
 /* Markdown styling */
