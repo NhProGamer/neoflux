@@ -7,7 +7,7 @@
 </div>
 
 <!-- Hero Section -->
-<section class="container mx-auto px-6 py-16 md:py-24">
+<section class="container mx-auto px-6 py-16 md:py-24 no-print">
     <div class="max-w-4xl mx-auto">
         <div class="text-center mb-16">
             <span class="inline-block px-3 py-1 rounded-full bg-surface text-primary text-sm font-medium mb-4">{{ .Params.badge | default "À Propos" }}</span>
@@ -82,6 +82,45 @@
                         </div>
                     </div>
 
+                    <!-- Experience -->
+                    {{ if .Params.experience }}
+                    <div class="bg-surface rounded-xl p-6 border border-surface hover:border-primary/30 transition-colors">
+                        <h3 class="text-lg font-semibold mb-4">Expérience</h3>
+                        <div class="space-y-4">
+                            {{ range .Params.experience }}
+                            <div class="border-l-2 border-primary/30 pl-4 pb-4">
+                                <h4 class="font-medium text-sm">{{ .title }}</h4>
+                                <p class="text-xs text-text-secondary mb-1">{{ .company }} • {{ .duration }}</p>
+                                {{ if .description }}
+                                <p class="text-xs text-text-secondary">{{ .description }}</p>
+                                {{ end }}
+                            </div>
+                            {{ end }}
+                        </div>
+                    </div>
+                    {{ end }}
+
+                    <!-- Education -->
+                    {{ if .Params.education }}
+                    <div class="bg-surface rounded-xl p-6 border border-surface hover:border-primary/30 transition-colors">
+                        <h3 class="text-lg font-semibold mb-4">Formation</h3>
+                        <div class="space-y-4">
+                            {{ range .Params.education }}
+                            <div class="border-l-2 border-primary/30 pl-4 pb-4">
+                                <h4 class="font-medium text-sm">{{ .degree }}</h4>
+                                <p class="text-xs text-text-secondary mb-1">{{ .school }} • {{ .year }}</p>
+                                {{ if .status }}
+                                <p class="text-xs text-primary">{{ .status }}</p>
+                                {{ end }}
+                                {{ if .mention }}
+                                <p class="text-xs text-text-secondary">{{ .mention }}</p>
+                                {{ end }}
+                            </div>
+                            {{ end }}
+                        </div>
+                    </div>
+                    {{ end }}
+
                     <!-- Skills -->
                     {{ if .Params.skills }}
                     <div class="bg-surface rounded-xl p-6 border border-surface hover:border-primary/30 transition-colors">
@@ -102,29 +141,92 @@
                     </div>
                     {{ end }}
 
-                    <!-- Technologies -->
-                    {{ if .Params.technologies }}
+                    <!-- Soft Skills -->
+                    {{ if .Params.soft_skills }}
                     <div class="bg-surface rounded-xl p-6 border border-surface hover:border-primary/30 transition-colors">
-                        <h3 class="text-lg font-semibold mb-4">Technologies</h3>
-                        <div class="flex flex-wrap gap-2">
-                            {{ range .Params.technologies }}
-                            <span class="px-3 py-1 rounded-full bg-background text-primary text-xs font-medium">{{ . }}</span>
+                        <h3 class="text-lg font-semibold mb-4">Soft Skills</h3>
+                        <div class="space-y-2">
+                            {{ range .Params.soft_skills }}
+                            <div class="flex items-center text-sm">
+                                <div class="w-2 h-2 rounded-full bg-primary mr-3 flex-shrink-0"></div>
+                                <span>{{ . }}</span>
+                            </div>
                             {{ end }}
                         </div>
                     </div>
                     {{ end }}
 
-                    <!-- Contact CTA -->
+                    <!-- Technologies -->
+                    {{ if .Params.technologies }}
                     <div class="bg-surface rounded-xl p-6 border border-surface hover:border-primary/30 transition-colors">
-                        <h3 class="text-lg font-semibold mb-3">Travaillons ensemble !</h3>
-                        <a href="mailto:contact@nhoul.fr" class="block w-full px-4 py-2 rounded-md bg-primary hover:bg-primary-dark text-background font-medium text-center transition-colors">
-                            Me contacter
+                        <h3 class="text-lg font-semibold mb-4">Technologies</h3>
+                        {{ if .Params.technologies.backend }}
+                        <!-- Technologies organisées par catégories -->
+                        {{ range $category, $techs := .Params.technologies }}
+                        {{ if ne $category "backend" }}{{ continue }}{{ end }}
+                        <div class="mb-4">
+                            <h4 class="text-sm font-medium text-text-secondary mb-2 capitalize">{{ $category }}</h4>
+                            <div class="flex flex-wrap gap-2">
+                                {{ range $techs }}
+                                <span class="px-2 py-1 rounded-full bg-background text-primary text-xs font-medium">{{ . }}</span>
+                                {{ end }}
+                            </div>
+                        </div>
+                        {{ end }}
+                        {{ range $category, $techs := .Params.technologies }}
+                        {{ if eq $category "backend" }}{{ continue }}{{ end }}
+                        <div class="mb-4">
+                            <h4 class="text-sm font-medium text-text-secondary mb-2 capitalize">{{ $category }}</h4>
+                            <div class="flex flex-wrap gap-2">
+                                {{ range $techs }}
+                                <span class="px-2 py-1 rounded-full bg-background text-primary text-xs font-medium">{{ . }}</span>
+                                {{ end }}
+                            </div>
+                        </div>
+                        {{ end }}
+                        {{ else }}
+                        <!-- Technologies en liste simple -->
+                        <div class="flex flex-wrap gap-2">
+                            {{ range .Params.technologies }}
+                            <span class="px-3 py-1 rounded-full bg-background text-primary text-xs font-medium">{{ . }}</span>
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+
+                    <!-- Contact CTA -->
+                    <div class="bg-surface rounded-xl p-6 border border-surface hover:border-primary/30 transition-colors no-print">
+                        <h3 class="text-lg font-semibold mb-3">Besoin de parler ?</h3>
+                        {{ if .Params.profile.email }}
+                        <a href="mailto:{{ .Params.profile.email }}" class="block w-full px-4 py-2 rounded-md bg-primary hover:bg-primary-dark text-background font-medium text-center transition-colors mb-3">
+                            Contactez moi
                         </a>
+                        {{ else }}
+                        <a href="mailto:contact@nhoul.fr" class="block w-full px-4 py-2 rounded-md bg-primary hover:bg-primary-dark text-background font-medium text-center transition-colors mb-3">
+                            Contactez moi
+                        </a>
+                        {{ end }}
+
+                        <!-- Liens sociaux -->
+                        {{ if or .Params.profile.linkedin .Params.profile.github }}
+                        <div class="flex space-x-2 pt-2 border-t border-background">
+                            {{ if .Params.profile.linkedin }}
+                            <a href="{{ .Params.profile.linkedin }}" target="_blank" class="flex-1 px-3 py-2 rounded-md bg-background hover:bg-primary/10 text-text-secondary hover:text-primary text-center text-sm transition-colors">
+                                LinkedIn
+                            </a>
+                            {{ end }}
+                            {{ if .Params.profile.github }}
+                            <a href="{{ .Params.profile.github }}" target="_blank" class="flex-1 px-3 py-2 rounded-md bg-background hover:bg-primary/10 text-text-secondary hover:text-primary text-center text-sm transition-colors">
+                                GitHub
+                            </a>
+                            {{ end }}
+                        </div>
+                        {{ end }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-</body>
 {{ end }}
