@@ -3,6 +3,9 @@ Particles.js integration for starry sky background animation
 This partial includes the particles.js library and initialization
 */}}
 
+{{/* Only include particles if enabled in config */}}
+{{ if .Site.Params.animation.enable_particles }}
+
 {{/* Load particles.js from CDN */}}
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
@@ -11,3 +14,5 @@ This partial includes the particles.js library and initialization
 
 {{/* Container for particles - positioned behind everything */}}
 <div id="particles-js" class="fixed inset-0 -z-10 pointer-events-none"></div>
+
+{{ end }}
