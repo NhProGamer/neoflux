@@ -16,15 +16,15 @@
         <!-- Statistiques rapides -->
         <div class="flex justify-center space-x-8 mt-8">
             <div class="text-center">
-                <div class="text-2xl font-bold text-primary">18+</div>
+                <div class="text-2xl font-bold text-primary">{{ $totalTools := 0 }}{{ range .Params.categories }}{{ $totalTools = add $totalTools (len .tools) }}{{ end }}{{ $totalTools }}+</div>
                 <div class="text-sm text-text-secondary">Outils</div>
             </div>
             <div class="text-center">
-                <div class="text-2xl font-bold text-secondary">7</div>
+                <div class="text-2xl font-bold text-secondary">{{ range .Params.categories }}{{ if eq .name "Langages" }}{{ len .tools }}{{ end }}{{ end }}</div>
                 <div class="text-sm text-text-secondary">Langages</div>
             </div>
             <div class="text-center">
-                <div class="text-2xl font-bold text-accent">4</div>
+                <div class="text-2xl font-bold text-accent">{{ range .Params.categories }}{{ if eq .name "Systèmes d’exploitation" }}{{ len .tools }}{{ end }}{{ end }}</div>
                 <div class="text-sm text-text-secondary">Systèmes</div>
             </div>
         </div>
@@ -72,42 +72,6 @@
             <p class="text-sm text-text-secondary/70">Veuillez ajouter des catégories dans le fichier de configuration.</p>
         </div>
         {{ end }}
-    </div>
-</section>
-
-<!-- Section supplémentaire pour les outils préférés -->
-<section class="bg-surface/30 border-t border-surface/20">
-    <div class="container mx-auto px-4 sm:px-6 py-12">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-2xl sm:text-3xl font-bold mb-4">🌟 Mes outils préférés</h2>
-            <p class="text-text-secondary mb-8">Quelques outils que j’utilise quotidiennement et que je recommande.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-surface rounded-xl p-6 border border-surface hover:border-secondary/30 transition-colors">
-                    <div class="w-12 h-12 mx-auto mb-4 bg-secondary/10 rounded-full flex items-center justify-center">
-                        <span class="text-xl">💻</span>
-                    </div>
-                    <h3 class="font-semibold mb-2">GoLand</h3>
-                    <p class="text-sm text-text-secondary">Mon IDE préféré pour le développement Go - rapide, intelligent et bien intégré.</p>
-                </div>
-                
-                <div class="bg-surface rounded-xl p-6 border border-surface hover:border-accent/30 transition-colors">
-                    <div class="w-12 h-12 mx-auto mb-4 bg-accent/10 rounded-full flex items-center justify-center">
-                        <span class="text-xl">📝</span>
-                    </div>
-                    <h3 class="font-semibold mb-2">Obsidian</h3>
-                    <p class="text-sm text-text-secondary">Pour la prise de notes et l'organisation des connaissances avec liens bidirectionnels.</p>
-                </div>
-                
-                <div class="bg-surface rounded-xl p-6 border border-surface hover:border-primary/30 transition-colors">
-                    <div class="w-12 h-12 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
-                        <span class="text-xl">🐧</span>
-                    </div>
-                    <h3 class="font-semibold mb-2">Arch Linux</h3>
-                    <p class="text-sm text-text-secondary">Mon système principal pour le développement - léger, personnalisable et puissant.</p>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
 
