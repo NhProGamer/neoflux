@@ -1,31 +1,71 @@
 <section id="expertise" class="container mx-auto px-6 py-16">
     <div class="text-center mb-16">
-    <span class="inline-block px-3 py-1 rounded-full bg-surface text-primary text-sm font-medium mb-4">
-      Expertise
-    </span>
+        <span class="inline-block px-4 py-2 rounded-full bg-surface text-primary text-sm font-medium mb-4 animate-float animation-delay-1000">
+            🚀 Expertise
+        </span>
         <h2 class="text-3xl md:text-4xl font-bold mb-4">
-            {{ .Site.Params.expertise.title }}
+            {{ .Site.Params.expertise.title | default "Mes domaines d'expertise" }}
         </h2>
-        <p class="text-lg text-text-secondary max-w-2xl mx-auto">
-            {{ .Site.Params.expertise.description }}
+        <p class="text-lg text-text-secondary max-w-3xl mx-auto">
+            {{ .Site.Params.expertise.description | default "Découvrez les technologies et méthodologies que je maîtrise pour créer des solutions backend robustes et performantes." }}
         </p>
     </div>
 
-    <!-- Responsive grid qui s’adapte au nombre d’items -->
+    <!-- Grille améliorée avec effets -->
     <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {{ range .Site.Params.expertise.items }}
-        <div class="bg-surface rounded-xl p-8 border border-surface hover:border-primary transition-colors duration-300">
-            <!-- Icône -->
+        <div class="bg-surface rounded-xl p-8 border border-surface hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 group">
+            <!-- Icône améliorée -->
             {{ with .icon }}
-            <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
+            <div class="w-14 h-14 rounded-xl bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center mb-6 transition-colors">
                 {{ . | safeHTML }}
             </div>
             {{ end }}
             <!-- Titre -->
-            <h3 class="text-xl font-semibold mb-3">{{ .title }}</h3>
+            <h3 class="text-xl font-semibold mb-4 group-hover:text-primary transition-colors">{{ .title }}</h3>
             <!-- Description -->
-            <p class="text-text-secondary">{{ .description }}</p>
+            <p class="text-text-secondary leading-relaxed">{{ .description }}</p>
+            <!-- Badge de compétence -->
+            {{ if .badge }}
+            <div class="mt-6">
+                <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">{{ .badge }}</span>
+            </div>
+            {{ end }}
         </div>
         {{ end }}
+    </div>
+    
+    <!-- Section supplémentaire pour les technologies clés -->
+    <div class="mt-16 bg-surface/50 rounded-2xl p-8 border border-surface/30">
+        <div class="text-center mb-8">
+            <h3 class="text-xl font-bold mb-4">🔧 Technologies que j'utilise</h3>
+            <div class="w-12 h-1 bg-primary/30 rounded-full mx-auto"></div>
+        </div>
+        <div class="flex flex-wrap justify-center gap-4">
+            <div class="bg-surface rounded-lg px-4 py-2 border border-surface flex items-center gap-2">
+                <span class="text-primary">🟦</span>
+                <span class="font-medium">Node.js</span>
+            </div>
+            <div class="bg-surface rounded-lg px-4 py-2 border border-surface flex items-center gap-2">
+                <span class="text-secondary">🐍</span>
+                <span class="font-medium">Python</span>
+            </div>
+            <div class="bg-surface rounded-lg px-4 py-2 border border-surface flex items-center gap-2">
+                <span class="text-accent">🐹</span>
+                <span class="font-medium">Go</span>
+            </div>
+            <div class="bg-surface rounded-lg px-4 py-2 border border-surface flex items-center gap-2">
+                <span class="text-text-secondary">☕</span>
+                <span class="font-medium">Java</span>
+            </div>
+            <div class="bg-surface rounded-lg px-4 py-2 border border-surface flex items-center gap-2">
+                <span class="text-text-secondary">🐘</span>
+                <span class="font-medium">PostgreSQL</span>
+            </div>
+            <div class="bg-surface rounded-lg px-4 py-2 border border-surface flex items-center gap-2">
+                <span class="text-text-secondary">🚢</span>
+                <span class="font-medium">Docker</span>
+            </div>
+        </div>
     </div>
 </section>
