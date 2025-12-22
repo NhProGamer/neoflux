@@ -1,0 +1,12 @@
+{{/*
+Particles.js container element
+This partial includes the container div for the particles animation
+*/}}
+
+{{/* Only include container if particles are enabled in config */}}
+{{ if .Site.Params.animation.enable_particles }}
+
+{{/* Container for particles - positioned behind everything */}}
+<div id="particles-js" class="fixed inset-0 -z-10 pointer-events-none"></div>
+
+{{ end }}

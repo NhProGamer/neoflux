@@ -2,6 +2,7 @@
 <html lang="fr">
 {{ partial "head.html" . }}
 <body class="bg-background text-text-primary font-sans min-h-screen flex flex-col">
+    {{ partial "particles-container.html" . }}
     {{ partial "header.html" . }}
     {{ block "main" . }}{{ end }}
     {{ partial "footer.html" . }}
