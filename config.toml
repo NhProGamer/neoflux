@@ -8,6 +8,13 @@ bio = ""
 languages = []
 chip = ""
 
+# Animation settings
+[params.animation]
+enable_particles = true  # Enable/disable starry sky animation
+particle_count = 120     # Number of stars (default: 120)
+particle_color = "#ffffff" # Color of stars (default: white)
+particle_speed = 0.15    # Movement speed (0.01-1.0)
+
 [params.term]
 user = ""
 host = ""
