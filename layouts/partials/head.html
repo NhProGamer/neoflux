@@ -6,4 +6,8 @@
     {{ with (templates.Defer (dict "key" "global")) }}
     {{ partial "css.html" . }}
     {{ end }}
+    {{ partial "particles.html" . }}
+    <!-- Particles.js pour l'animation de ciel étoilé -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="/js/particles-bundle.js" type="module"></script>
 </head>
