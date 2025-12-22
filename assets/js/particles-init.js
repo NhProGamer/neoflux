@@ -16,6 +16,13 @@ document.addEventListener('DOMContentLoaded', function() {
       canvas.style.height = '100%';
       canvas.style.zIndex = '-1';
       canvas.style.pointerEvents = 'none';
+      
+      // Debug: Log pour vérifier que l'initialisation a fonctionné
+      console.log('✨ Particles.js initialized - Starry sky animation active');
+    } else {
+      console.warn('⚠️ Particles container not found');
     }
+  } else {
+    console.error('❌ particlesJS is not defined - Make sure particles.js is loaded');
   }
 });
