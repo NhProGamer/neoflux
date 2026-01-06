@@ -2,9 +2,13 @@
 <html lang="fr">
 {{ partial "head.html" . }}
 <body class="bg-background text-text-primary font-sans min-h-screen flex flex-col">
-    {{ partial "particles-container.html" . }}
-    {{ partial "header.html" . }}
+{{ partial "particles-container.html" . }}
+{{ partial "header.html" . }}
+
+<main class="flex-1">
     {{ block "main" . }}{{ end }}
-    {{ partial "footer.html" . }}
+</main>
+
+{{ partial "footer.html" . }}
 </body>
 </html>
