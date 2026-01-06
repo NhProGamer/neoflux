@@ -183,15 +183,19 @@
 
 <!-- Bouton de téléchargement -->
 <div class="flex justify-center py-6 print:hidden no-print">
-    <a href="/images/cv.pdf" download="CV_{{ .Site.Params.first_name }}_{{ .Site.Params.last_name }}.pdf"
-        class="px-6 py-3 bg-indigo-600 text-white text-sm font-medium rounded-lg shadow-lg hover:bg-indigo-700 transition-colors flex items-center gap-2">
+    <a
+            href="/images/cv{{ if eq .Site.Language.Lang `en` }}-en{{ end }}.pdf"
+            download="CV_{{ .Site.Params.first_name }}_{{ .Site.Params.last_name }}.pdf"
+            class="px-6 py-3 bg-indigo-600 text-white text-sm font-medium rounded-lg shadow-lg hover:bg-indigo-700 transition-colors flex items-center gap-2"
+    >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
         </svg>
         {{ i18n "cv_download_button" }}
     </a>
 </div>
+
 
 <style>
     .cv-container {
