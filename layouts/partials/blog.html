@@ -1,22 +1,25 @@
 <section id="blog" class="container mx-auto px-6 py-16">
     <div class="text-center mb-16">
-        <span class="inline-block px-4 py-2 rounded-full bg-surface text-primary text-sm font-medium mb-4 animate-float animation-delay-1500">
-            📝 Blog
+        <span
+            class="inline-block px-4 py-2 rounded-full bg-surface text-primary text-sm font-medium mb-4 animate-float animation-delay-1500">
+            📝 {{ i18n "blog_badge" }}
         </span>
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Mes derniers articles</h2>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">{{ i18n "blog_latest_title" }}</h2>
         <p class="text-lg text-text-secondary max-w-3xl mx-auto">
-            J'écris sur le développement backend, mes projets personnels et professionnels, mes apprentissages et mes découvertes techniques.
+            {{ i18n "blog_description" }}
         </p>
     </div>
 
     <div class="grid md:grid-cols-2 gap-8">
         {{ range first 2 (where site.RegularPages "Section" "blog") }}
         {{ $page := . }}
-        <a href="{{ $page.RelPermalink }}" class="bg-surface rounded-xl border border-surface hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10 card-hover block overflow-hidden transition-all duration-300">
+        <a href="{{ $page.RelPermalink }}"
+            class="bg-surface rounded-xl border border-surface hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10 card-hover block overflow-hidden transition-all duration-300">
             {{ with $page.Params.featured_image }}
             {{ $img := $page.Resources.GetMatch . }}
             {{ with $img }}
-            <img src="{{ .RelPermalink }}" alt="{{ $page.Title }}" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105">
+            <img src="{{ .RelPermalink }}" alt="{{ $page.Title }}"
+                class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105">
             {{ end }}
             {{ end }}
             <div class="p-8">
@@ -30,21 +33,25 @@
                 <p class="text-text-secondary mb-6 leading-relaxed">
                     {{ $page.Summary }}
                 </p>
-                <span class="inline-flex items-center text-primary font-medium group-hover:translate-x-1 transition-transform">
-                Lire l'article
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-            </span>
+                <span
+                    class="inline-flex items-center text-primary font-medium group-hover:translate-x-1 transition-transform">
+                    {{ i18n "blog_read_more" }}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </span>
             </div>
         </a>
         {{ end }}
     </div>
 
     <div class="text-center mt-12">
-        <a href="/blog" class="inline-flex items-center px-6 py-3 rounded-md bg-surface hover:bg-surface/80 border border-surface hover:border-primary/30 text-text-primary font-medium transition-colors group">
-            Voir tous les articles
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <a href="/blog"
+            class="inline-flex items-center px-6 py-3 rounded-md bg-surface hover:bg-surface/80 border border-surface hover:border-primary/30 text-text-primary font-medium transition-colors group">
+            {{ i18n "blog_view_all" }}
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
         </a>

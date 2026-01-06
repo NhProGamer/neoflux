@@ -2,19 +2,60 @@
     <div class="flex justify-between items-center">
         <div class="flex items-center space-x-3">
             <div class="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
-                <span class="font-mono font-bold text-primary">{{ printf "%s%s" (upper (substr .Site.Params.first_name 0 1)) (upper (substr .Site.Params.last_name 0 1)) }}</span>
+                <span class="font-mono font-bold text-primary">{{ printf "%s%s" (upper (substr .Site.Params.first_name 0
+                    1)) (upper (substr .Site.Params.last_name 0 1)) }}</span>
             </div>
             <span class="font-medium">{{ .Site.Params.pseudo }}</span>
         </div>
 
         <!-- Navigation desktop (toujours cachée sur mobile) -->
         <nav class="hidden md:flex items-center space-x-8">
-            <a href="/#home" class="text-text-secondary hover:text-primary transition-colors">Accueil</a>
-            <a href="/#expertise" class="text-text-secondary hover:text-primary transition-colors">Expertise</a>
+            <a href="/#home" class="text-text-secondary hover:text-primary transition-colors">{{ i18n "nav_home" }}</a>
+            <a href="/#expertise" class="text-text-secondary hover:text-primary transition-colors">{{ i18n
+                "nav_expertise" }}</a>
             <!--<a href="/#projects" class="text-text-secondary hover:text-primary transition-colors">Projets</a>-->
-            <a href="/blog" class="text-text-secondary hover:text-primary transition-colors">Blog</a>
-            <a href="/tools" class="text-text-secondary hover:text-primary transition-colors">Outils</a>
-            <a href="/about" class="text-text-secondary hover:text-primary transition-colors">A Propos</a>
+            <a href="/blog" class="text-text-secondary hover:text-primary transition-colors">{{ i18n "nav_blog" }}</a>
+            <a href="/tools" class="text-text-secondary hover:text-primary transition-colors">{{ i18n "nav_tools" }}</a>
+            <a href="/about" class="text-text-secondary hover:text-primary transition-colors">{{ i18n "nav_about" }}</a>
+
+            <!-- Language Switcher -->
+            <div class="relative group ml-4">
+                <button
+                    class="flex items-center text-text-secondary hover:text-primary transition-colors focus:outline-none">
+                    <span class="mr-1">{{ .Site.Language.LanguageName }}</span>
+                    <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+                <div
+                    class="absolute right-0 mt-2 w-32 bg-surface border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    {{ range .Site.Languages }}
+                    {{ $lang := . }}
+                    {{ $url := "" }}
+                    {{ range $.Page.AllTranslations }}
+                    {{ if eq .Language.Lang $lang.Lang }}
+                    {{ $url = .RelPermalink }}
+                    {{ end }}
+                    {{ end }}
+                    {{ if eq $url "" }}
+                    <!-- Fallback: Home URL of the language -->
+                    {{ range $.Site.Sites }}
+                    {{ if eq .Language.Lang $lang.Lang }}
+                    {{ $url = .Home.RelPermalink }}
+                    {{ end }}
+                    {{ end }}
+                    {{ end }}
+
+                    {{ if eq . $.Site.Language }}
+                    {{ else }}
+                    <a href="{{ $url }}"
+                        class="block px-4 py-2 text-sm text-text-secondary hover:bg-primary/10 hover:text-primary">
+                        {{ .LanguageName }}
+                    </a>
+                    {{ end }}
+                    {{ end }}
+                </div>
+            </div>
         </nav>
 
         <!-- Bouton menu mobile -->
@@ -24,18 +65,50 @@
     <!-- Menu mobile (caché par défaut) -->
     <nav id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
         <div class="flex flex-col space-y-4">
-            <a href="/#home" class="block text-text-secondary hover:text-primary transition-colors">Accueil</a>
-            <a href="/#expertise" class="block text-text-secondary hover:text-primary transition-colors">Expertise</a>
+            <a href="/#home" class="block text-text-secondary hover:text-primary transition-colors">{{ i18n "nav_home"
+                }}</a>
+            <a href="/#expertise" class="block text-text-secondary hover:text-primary transition-colors">{{ i18n
+                "nav_expertise" }}</a>
             <!--<a href="/#projects" class="block text-text-secondary hover:text-primary transition-colors">Projets</a>-->
-            <a href="/blog" class="block text-text-secondary hover:text-primary transition-colors">Blog</a>
-            <a href="/tools" class="block text-text-secondary hover:text-primary transition-colors">Outils</a>
-            <a href="/about" class="block text-text-secondary hover:text-primary transition-colors">A Propos</a>
+            <a href="/blog" class="block text-text-secondary hover:text-primary transition-colors">{{ i18n "nav_blog"
+                }}</a>
+            <a href="/tools" class="block text-text-secondary hover:text-primary transition-colors">{{ i18n "nav_tools"
+                }}</a>
+            <a href="/about" class="block text-text-secondary hover:text-primary transition-colors">{{ i18n "nav_about"
+                }}</a>
+
+            <div class="border-t border-border pt-4 mt-4">
+                <span class="block text-sm text-text-secondary mb-2">Langue / Language</span>
+                <div class="flex space-x-4">
+                    {{ range .Site.Languages }}
+                    {{ $lang := . }}
+                    {{ $url := "" }}
+                    {{ range $.Page.AllTranslations }}
+                    {{ if eq .Language.Lang $lang.Lang }}
+                    {{ $url = .RelPermalink }}
+                    {{ end }}
+                    {{ end }}
+                    {{ if eq $url "" }}
+                    {{ range $.Site.Sites }}
+                    {{ if eq .Language.Lang $lang.Lang }}
+                    {{ $url = .Home.RelPermalink }}
+                    {{ end }}
+                    {{ end }}
+                    {{ end }}
+
+                    <a href="{{ $url }}"
+                        class="text-sm {{ if eq . $.Site.Language }}text-primary font-bold{{ else }}text-text-secondary hover:text-primary{{ end }}">
+                        {{ .LanguageName }}
+                    </a>
+                    {{ end }}
+                </div>
+            </div>
         </div>
     </nav>
 </header>
 
 <script>
-    document.getElementById('mobile-menu-button').addEventListener('click', function() {
+    document.getElementById('mobile-menu-button').addEventListener('click', function () {
         const menu = document.getElementById('mobile-menu');
         if (menu.classList.contains('hidden')) {
             menu.classList.remove('hidden');
