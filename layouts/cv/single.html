@@ -1,5 +1,5 @@
 {{ define "main" }}
-<main class="cv-container bg-white text-gray-900 max-w-5xl mx-auto p-8">
+<main class="cv-container bg-white text-gray-900 w-[21cm] h-[29.7cm] mx-auto p-8 overflow-hidden relative shadow-2xl print:shadow-none print:m-0">
     <!-- Header -->
     <header class="flex justify-between items-start border-b border-gray-300 pb-4 mb-6">
         <!-- À gauche : statut -->
@@ -204,18 +204,49 @@
 
 
 <style>
-    .cv-container {
-        width: 21cm;
-        min-height: 29.7cm;
-        background: white;
-    }
-
+    /* Configuration de la page pour l'imprimante */
     @page {
         size: A4;
-        /* Format de page (A4, Letter, etc.) */
-        width: 21cm;
-        min-height: 29.7cm;
-        background: white;
+        margin: 0; /* Important : supprime les marges par défaut du navigateur */
+    }
+
+    /* Styles pour l'impression */
+    @media print {
+        body {
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact; /* Force l'impression des couleurs de fond */
+            print-color-adjust: exact;
+        }
+
+        .cv-container {
+            width: 21cm;
+            height: 29.7cm;
+            margin: 0;
+            page-break-after: avoid; /* Évite de créer une page blanche après */
+            overflow: hidden; /* Coupe net ce qui dépasse */
+        }
+
+        /* Masquer les éléments inutiles à l'impression */
+        .no-print {
+            display: none !important;
+        }
+    }
+
+    /* Styles pour la prévisualisation écran */
+    @media screen {
+        body {
+            background-color: #f3f4f6; /* Gris clair pour contraster avec la "feuille" */
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        /* Indicateur visuel si le contenu dépasse (optionnel, pour le debug) */
+        .cv-container {
+            /* Si vous voulez voir une barre rouge quand ça dépasse, décommentez : */
+            /* border-bottom: 5px solid red; */
+        }
     }
 </style>
+
 {{ end }}
